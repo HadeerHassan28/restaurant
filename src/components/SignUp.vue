@@ -1,6 +1,30 @@
 <script>
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 export default {
   name: "SignUp",
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+      id: uuidv4(),
+    };
+  },
+  methods: {
+    async signUp() {
+      let result = await axios
+        .post("http://localhost:3000/user", {
+          email: this.email,
+          password: this.password,
+          name: this.name,
+        })
+        .then((res) =>
+          localStorage.getItem("user-info", JSON.stringify(res.data))
+        )
+        .catch((error) => console.log(error));
+    },
+  },
 };
 </script>
 
@@ -10,11 +34,11 @@ export default {
 
   <div class="container">
     <!-- Name -->
-    <input type="text" name="" value="" placeholder="Enter Name" />
-    <input type="text" name="" value="" placeholder="Enter E-mail" />
-    <input type="password" name="" value="" placeholder="Enter Password" />
+    <input type="text" v-model="name" placeholder="Enter Name" />
+    <input type="text" v-model="email" placeholder="Enter E-mail" />
+    <input type="password" v-model="password" placeholder="Enter Password" />
 
-    <button type="submit">Sign Up</button>
+    <button type="submit" v-on:click="signUp">Sign Up</button>
   </div>
 </template>
 
