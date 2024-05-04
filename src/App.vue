@@ -1,9 +1,7 @@
-<script setup>
-import SignUp from "./components/SignUp.vue";
-</script>
+<script setup></script>
 
 <template>
-  <SignUp />
+  <router-view />
 </template>
 
 <style scoped></style>

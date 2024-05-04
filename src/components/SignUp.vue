@@ -19,11 +19,17 @@ export default {
           password: this.password,
           name: this.name,
         })
-        .then((res) =>
-          localStorage.getItem("user-info", JSON.stringify(res.data))
-        )
+        .then((res) => {
+          localStorage.setItem("user-info", JSON.stringify(res.data));
+        })
+
         .catch((error) => console.log(error));
     },
+  },
+  mounted() {
+    let user = localStorage.getItem("user-info");
+    console.log(user);
+    if (user) this.$router.push({ name: "Home" });
   },
 };
 </script>
