@@ -1,27 +1,25 @@
 <script>
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
+
 export default {
-  name: "SignUp",
+  name: "Login",
   data() {
     return {
-      name: "",
       email: "",
       password: "",
-      id: uuidv4(),
     };
   },
   methods: {
-    async signUp() {
+    async login() {
       let result = await axios
-        .post("http://localhost:3000/user", {
-          email: this.email,
-          password: this.password,
-          name: this.name,
-        })
+        .get(
+          `http://localhost:3000/user?email=${this.email}&password=${this.password}`
+        )
         .then((res) => {
-          localStorage.setItem("user-info", JSON.stringify(res.data));
-          this.$router.push({ name: "Home" });
+          if (res.data.length > 0) {
+            localStorage.setItem("user-info", JSON.stringify(res.data[0]));
+            this.$router.push({ name: "Home" });
+          }
         })
 
         .catch((error) => console.log(error));
@@ -29,7 +27,7 @@ export default {
   },
   mounted() {
     let user = localStorage.getItem("user-info");
-    console.log(user);
+    //console.log(user);
     if (user) this.$router.push({ name: "Home" });
   },
 };
@@ -37,17 +35,16 @@ export default {
 
 <template>
   <img src="../assets/logo1.png" class="logo" alt="Logo" />
-  <h1>Sign Up</h1>
+  <h1>Login</h1>
 
   <div class="container">
-    <input type="text" v-model="name" placeholder="Enter Name" />
     <input type="text" v-model="email" placeholder="Enter E-mail" />
     <input type="password" v-model="password" placeholder="Enter Password" />
 
-    <button type="submit" v-on:click="signUp">Sign Up</button>
+    <button type="submit" v-on:click="login">Login</button>
 
     <p>
-      <router-link to="/login" class="router-link">Login</router-link>
+      <router-link to="/signup" class="router-link">Sign Up</router-link>
     </p>
   </div>
 </template>
@@ -86,6 +83,9 @@ export default {
 }
 
 .container p {
+  color: var(--logo);
+  font-size: 18px;
+  font-weight: bolder;
   text-decoration: none;
 }
 .container p .router-link {
