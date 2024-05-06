@@ -2,6 +2,8 @@
   --logo: #fbb612;
   --primary: rgb(239, 239, 239);
   --sec: #151411b9;
+  --errorText: #f00909e1;
+  --errorBg: #c74b4b7c;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;

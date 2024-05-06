@@ -1,19 +1,17 @@
-<script>
-import Header from "./Header.vue";
-export default {
-  name: "Home",
-  components: {
-    Header,
-  },
-  mounted() {
-    let user = localStorage.getItem("user-info");
-    if (!user) this.$router.push({ name: "SignUp" });
-  },
-};
+<script setup>
+import { ref, onMounted } from "vue";
+
+const name = ref(null);
+
+onMounted(() => {
+  let user = localStorage.getItem("user-info");
+  name.value = JSON.parse(user).name;
+  if (!user) this.$router.push({ name: "SignUp" });
+});
 </script>
 
 <template>
-  <h1>Home page</h1>
+  <h1>Hello {{ name }}</h1>
 </template>
 
 <style></style>

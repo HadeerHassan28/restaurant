@@ -1,36 +1,35 @@
-<script>
+<script setup>
 import axios from "axios";
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 
-export default {
-  name: "Login",
-  data() {
-    return {
-      email: "",
-      password: "",
-    };
-  },
-  methods: {
-    async login() {
-      let result = await axios
-        .get(
-          `http://localhost:3000/user?email=${this.email}&password=${this.password}`
-        )
-        .then((res) => {
-          if (res.data.length > 0) {
-            localStorage.setItem("user-info", JSON.stringify(res.data[0]));
-            this.$router.push({ name: "Home" });
-          }
-        })
+const email = ref("");
+const password = ref("");
+const errMsg = ref("");
+const router = useRouter();
 
-        .catch((error) => console.log(error));
-    },
-  },
-  mounted() {
-    let user = localStorage.getItem("user-info");
-    //console.log(user);
-    if (user) this.$router.push({ name: "Home" });
-  },
+const login = async () => {
+  errMsg.value = "";
+  try {
+    let result = await axios.get(
+      `http://localhost:3000/user?email=${email}&password=${password}`
+    );
+    const userData = result.data[0];
+
+    if (userData) {
+      localStorage.setItem("user-info", JSON.stringify(res.data[0]));
+      router.push({ name: "Home" });
+    } else errMsg.value = "Invalid email or password";
+  } catch (error) {
+    console.log(error);
+  }
 };
+
+onMounted(() => {
+  let user = localStorage.getItem("user-info");
+  //console.log(user);
+  if (user) router.push({ name: "Home" });
+});
 </script>
 
 <template>
@@ -40,6 +39,7 @@ export default {
 
     <div class="container-form">
       <input type="text" v-model="email" placeholder="Enter E-mail" />
+
       <input type="password" v-model="password" placeholder="Enter Password" />
 
       <button type="submit" v-on:click="login">Login</button>
@@ -48,6 +48,7 @@ export default {
         <router-link to="/signup" class="router-link">Sign Up</router-link>
       </p>
     </div>
+    <div v-if="errMsg" class="errorMsg">{{ errMsg }}</div>
   </div>
 </template>
 
@@ -106,5 +107,14 @@ export default {
 
 .container-form p .router-link:hover {
   color: var(--sec);
+}
+
+.errorMsg {
+  border: 1px solid var(--errorText);
+  color: var(--errorText);
+  background: var(--errorBg);
+  text-align: center;
+  padding: 30px;
+  border-radius: 30px;
 }
 </style>

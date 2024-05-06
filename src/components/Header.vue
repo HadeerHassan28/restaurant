@@ -17,7 +17,7 @@ const logout = () => {
 
 onMounted(() => {
   user.value = localStorage.getItem("user-info");
-  console.log(user.value);
+  // console.log(user.value);
 });
 // onUpdated(() => {
 //   user.value = localStorage.getItem("user-info");
@@ -32,14 +32,14 @@ onMounted(() => {
 
     <!-- menu -->
     <div class="navText" v-if="user">
-      <a>Home</a>
-      <a>Add Restaurant</a>
-      <a>Update Restaurant</a>
+      <router-link to="/" class="text">Home</router-link>
+      <router-link to="/add" class="text">Add Restaurant</router-link>
+      <router-link to="/update" class="text">Update Restaurant</router-link>
     </div>
 
     <!-- Logout -->
-    <a class="logout" @click="logout" v-if="user">Logout</a>
-    <a class="logout" @click="signup" v-else>SignUp</a>
+    <a @click="logout" v-if="user">Logout</a>
+    <a @click="signup" v-else>SignUp</a>
   </div>
 </template>
 
@@ -61,12 +61,18 @@ onMounted(() => {
   height: auto;
 }
 
-.navText a {
+.navText .text {
   margin-right: 20px;
   text-decoration: none;
+  color: var(--primary);
 }
-.navText a:hover,
+
+.navText .text:hover,
 .nav a:hover {
   color: var(--logo);
+}
+.navText .text:before,
+.nav a:before {
+  color: var(--primary);
 }
 </style>
