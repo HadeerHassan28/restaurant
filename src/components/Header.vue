@@ -1,7 +1,28 @@
-<script>
-export default {
-  name: "Header",
+<script setup>
+import { onMounted, ref, onUpdated } from "vue";
+import { useRouter } from "vue-router";
+
+const user = ref(null);
+const router = useRouter();
+
+const signup = () => {
+  router.push({ name: "SignUp" });
 };
+
+const logout = () => {
+  localStorage.clear();
+  user.value = null;
+  router.push({ name: "Login" });
+};
+
+onMounted(() => {
+  user.value = localStorage.getItem("user-info");
+  console.log(user.value);
+});
+// onUpdated(() => {
+//   user.value = localStorage.getItem("user-info");
+//   console.log(user.value);
+// });
 </script>
 
 <template>
@@ -10,14 +31,15 @@ export default {
     <img src="../assets/header.png" class="img" />
 
     <!-- menu -->
-    <div class="navText">
+    <div class="navText" v-if="user">
       <a>Home</a>
       <a>Add Restaurant</a>
       <a>Update Restaurant</a>
     </div>
 
     <!-- Logout -->
-    <a class="logout">Logout</a>
+    <a class="logout" @click="logout" v-if="user">Logout</a>
+    <a class="logout" @click="signup" v-else>SignUp</a>
   </div>
 </template>
 
@@ -43,7 +65,8 @@ export default {
   margin-right: 20px;
   text-decoration: none;
 }
-.navText a:hover {
+.navText a:hover,
+.nav a:hover {
   color: var(--logo);
 }
 </style>

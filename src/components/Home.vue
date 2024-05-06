@@ -13,7 +13,6 @@ export default {
 </script>
 
 <template>
-  <Header />
   <h1>Home page</h1>
 </template>
 
