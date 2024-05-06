@@ -12,12 +12,12 @@ const login = async () => {
   errMsg.value = "";
   try {
     let result = await axios.get(
-      `http://localhost:3000/user?email=${email}&password=${password}`
+      `http://localhost:3000/user?email=${email.value}&password=${password.value}`
     );
     const userData = result.data[0];
-
+    console.log(result.data[0]);
     if (userData) {
-      localStorage.setItem("user-info", JSON.stringify(res.data[0]));
+      localStorage.setItem("user-info", JSON.stringify(result.data[0]));
       router.push({ name: "Home" });
     } else errMsg.value = "Invalid email or password";
   } catch (error) {

@@ -36,5 +36,28 @@
       "name": "hassan",
       "id": "I-Qcjc-"
     }
+  ],
+  "resturant": [
+    {
+      " id": "1",
+      "name": "Burger King",
+      "contact": "19456",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Burger_King_2020.svg/1200px-Burger_King_2020.svg.png",
+      "branches": "Heliopolis, Nasr City "
+    },
+    {
+      " id": "2",
+      "name": "ll divino pizzeria ",
+      "contact": "19333",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvoiq4IHcVy5B3kMe63pw8k5UAqmOF4GOFpU0Mw5_yQQ&s",
+      "branches": "Heliopolis, Nasr City "
+    },
+    {
+      " id": "3",
+      "name": "Butcher's Burger",
+      "contact": "19553",
+      "img": "https://media.licdn.com/dms/image/C4D0BAQGy6wg1KDxKqQ/company-logo_200_200/0/1637162262632/butcher_s_burger_logo?e=2147483647&v=beta&t=IhGZzuylyMJ4_kxNraAN8FgWodE21bfN1oOPb01pe4c",
+      "branches": "Heliopolis, Nasr City "
+    }
   ]
 }
