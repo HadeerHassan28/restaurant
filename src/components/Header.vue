@@ -1,8 +1,10 @@
 <script setup>
-import { onMounted, ref, onUpdated } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const user = ref(null);
+const userName = ref(null);
+
 const router = useRouter();
 
 const signup = () => {
@@ -17,12 +19,11 @@ const logout = () => {
 
 onMounted(() => {
   user.value = localStorage.getItem("user-info");
-  // console.log(user.value);
+  userName.value = JSON.parse(user.value).name;
+
+  console.log(userName.value);
 });
-// onUpdated(() => {
-//   user.value = localStorage.getItem("user-info");
-//   console.log(user.value);
-// });
+//console.log(user.value);
 </script>
 
 <template>
@@ -37,9 +38,22 @@ onMounted(() => {
       <router-link to="/update" class="text">Update Restaurant</router-link>
     </div>
 
-    <!-- Logout -->
-    <a @click="logout" v-if="user">Logout</a>
-    <a @click="signup" v-else>SignUp</a>
+    <div class="rightSide d-flex flex-row">
+      <!-- name -->
+      <div class="d-flex gap-2 align-items-center">
+        <font-awesome-icon
+          icon="fa-solid fa-user"
+          class="icon"
+          size="sm"
+          v-if="userName"
+        />
+        <a v-if="userName" class="name">{{ userName }}</a>
+      </div>
+
+      <!-- Logout -->
+      <a @click="logout" v-if="user" class="name">Logout</a>
+      <a @click="signup" v-else class="name">SignUp</a>
+    </div>
   </div>
 </template>
 
@@ -61,18 +75,19 @@ onMounted(() => {
   height: auto;
 }
 
-.navText .text {
+.navText .text,
+.name {
   margin-right: 20px;
   text-decoration: none;
   color: var(--primary);
 }
 
 .navText .text:hover,
-.nav a:hover {
+.nav .rightSide a:hover {
   color: var(--logo);
 }
 .navText .text:before,
-.nav a:before {
+.nav .rightSide a:before {
   color: var(--primary);
 }
 </style>

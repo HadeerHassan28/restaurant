@@ -4,6 +4,7 @@ import axios from "axios";
 
 const name = ref(null);
 const resturant = ref([]);
+const isSmallScreen = window.innerWidth < 768;
 
 onMounted(async () => {
   let user = localStorage.getItem("user-info");
@@ -24,29 +25,39 @@ onMounted(async () => {
 
 <template>
   <div class="container">
-    <h1>Hello {{ name }}</h1>
-    <!-- data -->
-
-    <div
-      class="card"
-      style="width: 18rem"
-      v-for="item in resturant"
-      ::key="item.id"
-    >
-      <img :src="item.img" class="card-img-top" alt="resturant img" />
-      <div class="card-body">
-        <h5 class="card-title">{{ item.name }}</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h1 class="title">Welcome to Our Restaurants</h1>
+    <div class="row d-flex justify-content-center">
+      <div
+        class="col-sm-6 col-md-4 col-lg-3"
+        v-for="item in resturant"
+        :key="item.id"
+      >
+        <!-- cards  -->
+        <div class="card p-3 m-3" :class="{ 'sm-width': isSmallScreen }">
+          <img :src="item.img" class="card-img-top" alt="resturant img" />
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">Contact: {{ item.contact }}</p>
+            <p class="card-text">Branches: {{ item.branches }}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style>
-.container {
+.title {
+  color: var(--title);
+}
+.sm-width {
+  width: 90%;
+}
+
+@media (min-width: 768px) {
+  .md-lg-width {
+    width: 100%;
+  }
 }
 </style>
