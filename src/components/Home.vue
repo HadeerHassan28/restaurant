@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import Card from "./Card.vue";
 
 const name = ref(null);
 const resturant = ref([]);
@@ -33,15 +34,7 @@ onMounted(async () => {
         :key="item.id"
       >
         <!-- cards  -->
-        <div class="card p-3 m-3" :class="{ 'sm-width': isSmallScreen }">
-          <img :src="item.img" class="card-img-top" alt="resturant img" />
-          <div class="card-body">
-            <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text">Contact: {{ item.contact }}</p>
-            <p class="card-text">Branches: {{ item.branches }}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
+        <Card :item="item" :isSmallScreen="isSmallScreen" />
       </div>
     </div>
   </div>
