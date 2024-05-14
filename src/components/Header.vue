@@ -21,7 +21,7 @@ onMounted(() => {
   user.value = localStorage.getItem("user-info");
   userName.value = JSON.parse(user.value).name;
 
-  console.log(userName.value);
+  //console.log(userName.value);
 });
 //console.log(user.value);
 </script>
@@ -34,8 +34,8 @@ onMounted(() => {
     <!-- menu -->
     <div class="navText" v-if="user">
       <router-link to="/" class="text">Home</router-link>
-      <router-link to="/add" class="text">Add Restaurant</router-link>
-      <router-link to="/update" class="text">Update Restaurant</router-link>
+      <router-link to="add" class="text">Add Restaurant</router-link>
+      <router-link to="update" class="text">Update Restaurant</router-link>
     </div>
 
     <div class="rightSide d-flex flex-row">

@@ -58,6 +58,20 @@
       "contact": "19553",
       "img": "https://media.licdn.com/dms/image/C4D0BAQGy6wg1KDxKqQ/company-logo_200_200/0/1637162262632/butcher_s_burger_logo?e=2147483647&v=beta&t=IhGZzuylyMJ4_kxNraAN8FgWodE21bfN1oOPb01pe4c",
       "branches": "Heliopolis, Nasr City "
+    },
+    {
+      "id": "10",
+      "name": "chili's",
+      "contact": "19488",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chili%27s_Logo.svg/2560px-Chili%27s_Logo.svg.png",
+      "branches": "city stars "
+    },
+    {
+      "name": "Primo's Pizza",
+      "branches": "city stars ",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8EszsPCw1He5BgXfqIQOfxU3YT5AH_dgOg_WuZUU6-A&s",
+      "contact": "19345",
+      "id": "NKYtOi5"
     }
   ]
 }
