@@ -99,7 +99,7 @@ onMounted(() => {
   font-weight: bold !important;
   font-size: 1rem !important;
 }
-.btn:hover {
+.bttn:hover {
   background-color: var(--primary) !important;
   color: var(--logo) !important;
   border: 1px solid var(--logo) !important;

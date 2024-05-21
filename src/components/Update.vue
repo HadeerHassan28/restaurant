@@ -1,37 +1,51 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
-import { v4 as uuidv4 } from "uuid";
+import { useRouter, useRoute } from "vue-router";
 import axios from "axios";
 
-const resturant = ref({
+const resturantItem = ref({
   name: "",
   branches: "",
   img: "",
   contact: "",
-  id: uuidv4(),
 });
+const id = ref(null);
 const router = useRouter();
+const route = useRoute();
 
-const handleAdd = async (e) => {
+const handleUpdate = async (e) => {
   e.preventDefault();
+
   try {
-    let result = await axios.post("http://localhost:3000/resturant", {
-      name: resturant.value.name,
-      branches: resturant.value.branches,
-      img: resturant.value.img,
-      contact: resturant.value.contact,
-    });
-    //console.log(result);
+    let result = await axios.put(
+      `http://localhost:3000/resturant/${id.value}`,
+      {
+        name: resturantItem.value.name,
+        branches: resturantItem.value.branches,
+        img: resturantItem.value.img,
+        contact: resturantItem.value.contact,
+      }
+    );
+    // console.log(result);
     router.push({ name: "Home" });
   } catch (error) {
     console.log(error);
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
   let user = localStorage.getItem("user-info");
   if (!user) router.push({ name: "SignUp" });
+
+  id.value = route.params.id;
+  try {
+    let result = await axios
+      .get(`http://localhost:3000/resturant/${id.value}`)
+      .then((item) => (resturantItem.value = item.data));
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
 });
 </script>
 
@@ -48,7 +62,7 @@ onMounted(() => {
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           name="name"
-          v-model="resturant.name"
+          v-model="resturantItem.name"
         />
       </div>
       <!-- branches -->
@@ -59,7 +73,7 @@ onMounted(() => {
           class="form-control"
           id="exampleInputPassword1"
           name="branches"
-          v-model="resturant.branches"
+          v-model="resturantItem.branches"
         />
       </div>
       <!-- contact -->
@@ -70,7 +84,7 @@ onMounted(() => {
           class="form-control"
           id="exampleInputPassword1"
           name="contact"
-          v-model="resturant.contact"
+          v-model="resturantItem.contact"
         />
       </div>
 
@@ -82,10 +96,9 @@ onMounted(() => {
           class="form-control"
           id="exampleInputPassword1"
           name="img"
-          v-model="resturant.img"
         />
       </div>
-      <button type="submit" class="btn bttn w-100" @click="handleAdd">
+      <button type="submit" class="btn bttn w-100" @click="handleUpdate">
         Submit
       </button>
     </form>
@@ -99,7 +112,7 @@ onMounted(() => {
   font-weight: bold !important;
   font-size: 1rem !important;
 }
-.btn:hover {
+.bttn:hover {
   background-color: var(--primary) !important;
   color: var(--logo) !important;
   border: 1px solid var(--logo) !important;
