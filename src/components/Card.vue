@@ -1,7 +1,6 @@
 <script setup>
+import { defineProps, defineEmits } from "vue";
 import axios from "axios";
-import { ref, onMounted } from "vue";
-import { fetchData } from "../lib/home";
 
 const props = defineProps({
   item: {
@@ -10,43 +9,31 @@ const props = defineProps({
   },
   isSmallScreen: null,
 });
-const resturant = ref([]);
 
-const handleDelate = async (id) => {
-  //console.log(id);
+const emit = defineEmits(["delete"]);
+
+const handleDelete = async () => {
   try {
-    let result = await axios.delete(`http://localhost:3000/resturant/${id}`);
-    console.log("Deleted:", result);
+    await axios.delete(`http://localhost:3000/resturant/${props.item.id}`);
+    emit("delete", props.item.id);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
-
-onMounted(async () => {
-  try {
-    const result = await fetchData();
-    //console.log(result);
-    resturant.value = result;
-  } catch (error) {
-    console.log(error);
-  }
-});
 </script>
 
 <template>
   <div class="card p-3 m-3" :class="{ 'sm-width': isSmallScreen }">
-    <img :src="item.img" class="card-img-top imgCard" alt="resturant img" />
+    <img :src="item.img" class="card-img-top imgCard" alt="restaurant img" />
     <div class="card-body">
       <h5 class="card-title">{{ item.name }}</h5>
       <p class="card-text">Contact: {{ item.contact }}</p>
       <p class="card-text">Branches: {{ item.branches }}</p>
       <div class="d-flex gap-2">
-        <router-link :to="'update/' + props.item.id" class="btn bttn"
+        <router-link :to="'update/' + item.id" class="btn bttn"
           >Update</router-link
         >
-        <button class="btn btnDelate" @click="handleDelate(item.id)">
-          Delate
-        </button>
+        <button class="btn btnDelete" @click="handleDelete">Delete</button>
       </div>
     </div>
   </div>
@@ -59,12 +46,12 @@ onMounted(async () => {
 .imgCard {
   height: 100%;
 }
-.btnDelate {
+.btnDelete {
   background-color: var(--errorText) !important;
   color: var(--primary) !important;
   font-weight: bold !important;
 }
-.btnDelate:hover {
+.btnDelete:hover {
   background-color: var(--primary) !important;
   color: var(--errorText) !important;
   border: 1px solid var(--errorText) !important;

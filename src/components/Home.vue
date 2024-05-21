@@ -1,28 +1,25 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios";
 import Card from "./Card.vue";
 import { fetchData } from "../lib/home";
-const name = ref(null);
+
 const resturant = ref([]);
 const isSmallScreen = window.innerWidth < 768;
 
-onMounted(async () => {
-  let user = localStorage.getItem("user-info");
-  name.value = JSON.parse(user).name;
-  if (!user) this.$router.push({ name: "SignUp" });
-
-  //Get from API
+const loadRestaurants = async () => {
   try {
-    const result = await fetchData();
-    //console.log(result);
-    // let result = await axios.get("http://localhost:3000/resturant");
-    resturant.value = result;
+    resturant.value = await fetchData();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
+};
 
-  //console.log(resturant.value);
+const handleDelete = async () => {
+  await loadRestaurants(); // Reload data after an item is deleted
+};
+
+onMounted(() => {
+  loadRestaurants();
 });
 </script>
 
@@ -35,8 +32,11 @@ onMounted(async () => {
         v-for="item in resturant"
         :key="item.id"
       >
-        <!-- cards  -->
-        <Card :item="item" :isSmallScreen="isSmallScreen" />
+        <Card
+          :item="item"
+          :isSmallScreen="isSmallScreen"
+          @delete="handleDelete"
+        />
       </div>
     </div>
   </div>

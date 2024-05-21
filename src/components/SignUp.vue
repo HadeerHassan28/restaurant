@@ -21,7 +21,7 @@ export default {
         })
         .then((res) => {
           localStorage.setItem("user-info", JSON.stringify(res.data));
-          this.$router.push({ name: "Home" });
+          this.$router.push({ name: "Login" });
         })
 
         .catch((error) => console.log(error));

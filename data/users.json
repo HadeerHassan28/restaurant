@@ -35,6 +35,36 @@
       "password": "123",
       "name": "hassan",
       "id": "I-Qcjc-"
+    },
+    {
+      "email": "ahmed@gmail.com",
+      "password": "123",
+      "name": "ahmed",
+      "id": "1bgZvoQ"
+    },
+    {
+      "email": "hazfa@gmail.com",
+      "password": "123",
+      "name": "hafza",
+      "id": "Pg9syDj"
+    },
+    {
+      "email": "tamer@gmail.com",
+      "password": "123",
+      "name": "tamer",
+      "id": "tVDWySe"
+    },
+    {
+      "email": "nadeen@gmail.com",
+      "password": "123",
+      "name": "nadeen",
+      "id": "c9Bh2Kz"
+    },
+    {
+      "email": "ali@gmail.com",
+      "password": "123",
+      "name": "ali",
+      "id": "5yMhjNb"
     }
   ],
   "resturant": [
@@ -53,11 +83,18 @@
       "branches": "Heliopolis, Nasr City "
     },
     {
-      "name": "c",
+      "name": "chili's",
       "branches": "city stars ",
       "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH2B2YU8_Fazx1AM-qQoTVeEWr07LJA2Iq4TsvcZ9P_Q&s",
       "contact": "19330",
-      "id": "w8SJJcX"
+      "id": "ehkuhqj"
+    },
+    {
+      "name": "chili's",
+      "branches": "city stars ",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH2B2YU8_Fazx1AM-qQoTVeEWr07LJA2Iq4TsvcZ9P_Q&s",
+      "contact": "19330",
+      "id": "ehkuhqj"
     }
   ]
 }

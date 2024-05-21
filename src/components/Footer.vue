@@ -1,8 +1,12 @@
 <script setup></script>
 
 <template>
-  <div class="containerFooter">
-    <h5 class="titleFooter w-100 text-center m-0">Hadder Hassan © 2024</h5>
+  <div class="container-fluid containerFooter">
+    <footer class="row bg-primary text-light py-3">
+      <div class="col-12 text-center">
+        <p class="mb-0">Hadder Hassan &copy; 2024</p>
+      </div>
+    </footer>
   </div>
 </template>
 

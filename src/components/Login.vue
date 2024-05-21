@@ -33,7 +33,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container mb-5">
     <img src="../assets/logo1.png" class="logo" alt="Logo" />
     <h1 class="title">Login</h1>
 
